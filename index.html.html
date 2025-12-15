@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李凱芹 Queena | 作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+/* --- 全局設定 --- */
+:root {
+  --primary-color: #003366;
+  --accent-color: #0072ff;
+  --bg-color: #eef7ff; 
+  --nav-bg: rgba(204, 231, 255, 0.95);
+  --text-font: 'Noto Sans TC', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--text-font);
+  scroll-behavior: smooth;
+  color: var(--primary-color);
+  background: var(--bg-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --- 導覽列 --- */
+nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 50, 100, 0.1);
+  display: flex;
+  /* 修改：讓選單靠右對齊 (原本是 space-between) */
+  justify-content: flex-end; 
+  align-items: center;
+  padding: 0 5%;
+  height: 70px;
+}
+
+/* 原本的 .nav-brand 樣式保留也沒關係，因為 HTML 已經拿掉了 */
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 1.05em;
+  transition: all 0.3s;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+nav a:hover { 
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--accent-color);
+}
+
+/* 下拉選單 */
+nav li { position: relative; }
+nav li ul {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 10px 0;
+  min-width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: none;
+  flex-direction: column;
+  text-align: center;
+}
+nav li:hover ul { display: flex; }
+nav li ul li a {
+  display: block;
+  padding: 10px 0;
+  font-size: 0.95em;
+  color: #555;
+}
+nav li ul li a:hover { background: #f0f8ff; color: var(--accent-color); }
+
+/* --- 區塊設定 --- */
+section {
+  padding: 100px 20px; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  text-align: center;
+  min-height: 80vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-margin-top: 60px; 
+}
+
+h2 {
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+  color: var(--primary-color);
+}
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-color);
+  margin: 15px auto 40px;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.page-description {
+  color: #555;
+  margin-bottom: 50px;
+  font-size: 1.1em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- 首頁 Hero --- */
+#home {
+  background: url('images/1.png') no-repeat center center;
+  background-size: cover; 
+  height: 100vh;          
+  width: 100%;            
+  max-width: none;        
+  padding: 0;             
+  margin: 0;
+  display: block;
+  position: relative;
+}
+
+/* --- 關於我 --- */
+.about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.about-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 15px 30px rgba(0,33,66,0.15);
+  border: 6px solid #fff;
+}
+.about-text h3 { font-size: 1.8em; margin-bottom: 10px; }
+.about-text p { font-size: 1.1em; }
+
+/* ========================================= */
+/* 樣式 A: 瀑布流 (Masonry Layout)        */
+/* ========================================= */
+.masonry-grid {
+  column-count: 3; 
+  column-gap: 25px;
+  width: 100%;
+  text-align: left;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 25px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.masonry-item img:hover { transform: scale(1.03); }
+
+/* ========================================= */
+/* 樣式 B: Flexbox 置中排版 (專為眾生設計)  */
+/* ========================================= */
+.square-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 置中 */
+  gap: 25px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.square-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  background: #fff;
+  aspect-ratio: 1 / 1;
+  width: calc((100% - 50px) / 3); 
+}
+
+.square-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.square-item img:hover { transform: scale(1.05); }
+
+
+/* --- 聯絡 --- */
+.contact-card {
+  background: #fff;
+  padding: 50px 80px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,33,66,0.1);
+  display: inline-block;
+  text-align: center;
+  min-width: 300px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  font-size: 1.2em;
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 40px;
+  background: #dfeeff;
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* --- 燈箱 (Lightbox) --- */
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 20, 40, 0.9);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+#lightbox-wrapper {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 5px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+#lightbox-desc {
+  color: #fff;
+  margin-top: 15px;
+  font-size: 1.1em;
+  text-align: center;
+}
+.lb-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: none;
+  font-size: 2em;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.lb-btn:hover { background: rgba(255,255,255,0.4); }
+#prevBtn { left: -60px; }
+#nextBtn { right: -60px; }
+#closeBtn {
+  position: absolute;
+  top: -45px; right: 0;
+  color: #fff; font-size: 2.5em;
+  cursor: pointer; background: none; border: none;
+}
+
+/* --- RWD 手機版調整 --- */
+@media (max-width: 900px) {
+  .masonry-grid { column-count: 2; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .menu-toggle { display: block; }
+  
+  /* 手機選單出現時，變成滿版 */
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 70px; left: 0; width: 100%;
+    background: #fff;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+  nav ul.active { display: flex; }
+  nav li { width: 100%; text-align: center; }
+  nav a { display: block; padding: 15px; }
+  nav li ul { position: static; box-shadow: none; display: none; }
+  nav li.open ul { display: flex; background: #f9f9f9; }
+  
+  section { padding: 60px 20px; min-height: auto; }
+  #home { min-height: 100vh; }
+  
+  .masonry-grid { column-count: 1; }
+  
+  .square-grid { gap: 15px; }
+  .square-item { 
+    width: calc((100% - 15px) / 2); 
+  }
+  
+  #prevBtn { left: 10px; }
+  #nextBtn { right: 10px; }
+  #closeBtn { top: -45px; right: 10px; }
+  
+  .contact-card { padding: 30px 20px; width: 100%; }
+  .contact-item { font-size: 1em; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="menu-toggle" id="mobile-menu">☰</div>
+  <ul id="nav-list">
+    <li><a href="#home">首頁</a></li>
+    <li><a href="#about">關於我</a></li>
+    <li id="works-dropdown-trigger">
+      <a href="javascript:void(0)">作品集 ▾</a>
+      <ul>
+        <li><a href="#works1">異想</a></li>
+        <li><a href="#works2">眾生</a></li>
+        <li><a href="#works3">插畫人物</a></li>
+        <li><a href="#works4">抽象萌物</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">聯絡</a></li>
+  </ul>
+</nav>
+
+<section id="home"></section>
+
+<section id="about">
+  <h2>關於我</h2>
+  <div class="about-container">
+    <img src="images/me.png" alt="李凱芹 Queena" class="about-img">
+    <div class="about-text">
+      <h3>李凱芹 Queena</h3>
+      <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 10px;">世新大學圖文傳播學系</p>
+      <p>擅長以人物描繪畫面情感，捕捉那些微小卻深刻的瞬間。</p>
+    </div>
+  </div>
+</section>
+
+<section id="works1">
+  <h2>《異想》系列作</h2>
+  <p class="page-description">女孩頭戴玻璃罩，象徵思緒與想像的無限延伸。</p>
+  <div class="masonry-grid">
+    <div class="masonry-item"><img src="images/w1.jpg" data-desc="在沈穩的咖啡色中，她安靜地與自己相處。"></div>
+    <div class="masonry-item"><img src="images/w2.jpg" data-desc="黃色包圍著她，如同突如其來的勇氣。"></div>
+    <div class="masonry-item"><img src="images/w3.jpg" data-desc="粉色輕輕落在她的身上。"></div>
+  </div>
+</section>
+
+<section id="works2">
+  <h2>《眾生》系列作</h2>
+  <p class="page-description">不同個體呈現獨特生命節奏。</p>
+  <div class="square-grid">
+    <div class="square-item"><img src="images/w4.jpg" data-desc="她坐在斑駁的光影裡。"></div>
+    <div class="square-item"><img src="images/w5.jpg" data-desc="她是一朵藍色的玫瑰。"></div>
+    <div class="square-item"><img src="images/w6.jpg" data-desc="在喧鬧世界的邊緣，她選擇沉默。"></div>
+    <div class="square-item"><img src="images/w7.jpg" data-desc="煙霧繞過他的指尖。"></div>
+    <div class="square-item"><img src="images/w8.jpg" data-desc="失落並非終點。"></div>
+  </div>
+</section>
+
+<section id="works3">
+  <h2>插畫人物</h2>
+  <p class="page-description">探索人性的光與影。</p>
+  <div class="masonry-grid">
+    <div class="masonry-item"><img src="images/w9.jpg" data-desc="撒旦: 他象徵內心深處最真實的黑暗。"></div>
+    <div class="masonry-item"><img src="images/w10.jpg" data-desc="女孩: 她站在光裡，清楚自己的價值。"></div>
+    <div class="masonry-item"><img src="images/w11.jpg" data-desc="擁抱自己: 堅強與柔軟，都是值得被愛的理由。"></div>
+  </div>
+</section>
+
+<section id="works4">
+  <h2>抽象萌物</h2>
+  <p class="page-description">簡單線條下的可愛狂想。</p>
+  <div class="masonry-grid">
+    <div class="masonry-item"><img src="images/w12.png" data-desc="抽象萌物 01"></div>
+    <div class="masonry-item"><img src="images/w13.png" data-desc="抽象萌物 02"></div>
+    <div class="masonry-item"><img src="images/w14.png" data-desc="抽象萌物 03"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>聯絡我</h2>
+  <div class="contact-card">
+    <div class="contact-item">
+      <span>✉ banana2003914@email.com</span>
+    </div>
+    <div class="contact-item">
+      <span> qin_vipxxi</span>
+    </div>
+    <div class="contact-item">
+      <span>📞 0905-027-201</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Queena</p>
+</footer>
+
+<div id="lightbox">
+  <div id="lightbox-wrapper">
+    <button id="closeBtn">&times;</button>
+    <button id="prevBtn" class="lb-btn">&#10094;</button>
+    <img id="lightbox-img" src="">
+    <button id="nextBtn" class="lb-btn">&#10095;</button>
+    <div id="lightbox-desc"></div>
+  </div>
+</div>
+
+<script>
+// 選單控制
+const mobileMenu = document.getElementById('mobile-menu');
+const navList = document.getElementById('nav-list');
+const worksTrigger = document.getElementById('works-dropdown-trigger');
+
+mobileMenu.addEventListener('click', () => {
+  navList.classList.toggle('active');
+});
+
+worksTrigger.addEventListener('click', () => {
+  if (window.innerWidth <= 768) {
+    worksTrigger.classList.toggle('open');
+  }
+});
+
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    navList.classList.remove('active');
+  });
+});
+
+// 燈箱控制
+const images = document.querySelectorAll('.masonry-item img, .square-item img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxDesc = document.getElementById('lightbox-desc');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const closeBtn = document.getElementById('closeBtn');
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  const img = images[currentIndex];
+  lightboxImg.src = img.src;
+  lightboxDesc.textContent = img.dataset.desc || '';
+  lightbox.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+images.forEach((img, idx) => {
+  img.addEventListener('click', () => openLightbox(idx));
+});
+
+prevBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  openLightbox(currentIndex);
+});
+
+nextBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % images.length;
+  openLightbox(currentIndex);
+});
+
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => {
+  if(e.target === lightbox) closeLightbox();
+});
+</script>
+
+</body>
+</html>
