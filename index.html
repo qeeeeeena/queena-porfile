@@ -6,30 +6,31 @@
 <title>李凱芹 Queena | 作品集</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
 /* --- 全局設定 --- */
 :root {
-  --primary-color: #003366;
-  --accent-color: #0072ff;
-  --bg-color: #eef7ff; 
-  --nav-bg: rgba(204, 231, 255, 0.95);
+  --primary-color: #003366; 
+  --accent-color: #0072ff;  
+  --bg-color: #f0f8ff;      
+  --nav-bg: #e1efff;        
   --text-font: 'Noto Sans TC', sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { scroll-behavior: smooth; }
+
 body {
   font-family: var(--text-font);
-  scroll-behavior: smooth;
   color: var(--primary-color);
   background: var(--bg-color);
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
-/* --- 導覽列 --- */
+/* --- 導覽列 (預設隱藏) --- */
 nav {
   background: var(--nav-bg);
   backdrop-filter: blur(5px);
@@ -37,506 +38,375 @@ nav {
   top: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0, 50, 100, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 51, 102, 0.05);
   display: flex;
-  /* 修改：讓選單靠右對齊 (原本是 space-between) */
-  justify-content: flex-end; 
+  justify-content: space-between;
   align-items: center;
   padding: 0 5%;
   height: 70px;
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* 原本的 .nav-brand 樣式保留也沒關係，因為 HTML 已經拿掉了 */
+nav.show-nav { transform: translateY(0); }
 
-.menu-toggle {
-  display: none;
-  font-size: 1.8em;
-  cursor: pointer;
-  color: var(--primary-color);
-}
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; text-decoration: none;}
+.menu-toggle { display: none; font-size: 1.8em; cursor: pointer; color: var(--primary-color); }
+nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+nav a { text-decoration: none; color: var(--primary-color); font-weight: 500; transition: all 0.3s; padding: 8px 16px; border-radius: 20px; }
+nav a:hover { background-color: rgba(255, 255, 255, 0.5); color: var(--accent-color); }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-  margin: 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: var(--primary-color);
-  font-weight: 500;
-  font-size: 1.05em;
-  transition: all 0.3s;
-  padding: 8px 12px;
-  border-radius: 5px;
-}
-
-nav a:hover { 
-  background-color: rgba(255, 255, 255, 0.5);
-  color: var(--accent-color);
-}
-
-/* 下拉選單 */
-nav li { position: relative; }
-nav li ul {
-  display: block;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  padding: 10px 0;
-  min-width: 150px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  display: none;
-  flex-direction: column;
-  text-align: center;
-}
-nav li:hover ul { display: flex; }
-nav li ul li a {
-  display: block;
-  padding: 10px 0;
-  font-size: 0.95em;
-  color: #555;
-}
-nav li ul li a:hover { background: #f0f8ff; color: var(--accent-color); }
-
-/* --- 區塊設定 --- */
-section {
-  padding: 100px 20px; 
-  max-width: 1200px; 
-  margin: 0 auto;
-  text-align: center;
-  min-height: 80vh; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  scroll-margin-top: 60px; 
-}
-
-h2 {
-  font-size: 2.2em;
-  margin-bottom: 20px;
-  position: relative;
-  display: inline-block;
-  color: var(--primary-color);
-}
-h2::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: var(--accent-color);
-  margin: 15px auto 40px;
-  border-radius: 2px;
-  opacity: 0.6;
-}
-
-.page-description {
-  color: #555;
-  margin-bottom: 50px;
-  font-size: 1.1em;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* --- 區塊通用設定 --- */
+section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; text-align: center; scroll-margin-top: 80px; }
+h2 { font-size: 2em; margin-bottom: 40px; position: relative; display: inline-block; color: var(--primary-color); font-weight: 700; }
+h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-color); margin: 15px auto 0; border-radius: 2px; }
+.page-description { color: #556; margin-bottom: 60px; font-size: 1.2em; max-width: 700px; margin-left: auto; margin-right: auto; }
 
 /* --- 首頁 Hero --- */
 #home {
-  background: url('images/1.png') no-repeat center center;
-  background-size: cover; 
-  height: 100vh;          
-  width: 100%;            
-  max-width: none;        
-  padding: 0;             
+  height: 100vh;
+  width: 100%;
+  padding: 0; 
   margin: 0;
-  display: block;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
   position: relative;
-}
-
-/* --- 關於我 --- */
-.about-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
-.about-img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 15px 30px rgba(0,33,66,0.15);
-  border: 6px solid #fff;
-}
-.about-text h3 { font-size: 1.8em; margin-bottom: 10px; }
-.about-text p { font-size: 1.1em; }
-
-/* ========================================= */
-/* 樣式 A: 瀑布流 (Masonry Layout)        */
-/* ========================================= */
-.masonry-grid {
-  column-count: 3; 
-  column-gap: 25px;
-  width: 100%;
-  text-align: left;
-}
-
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 25px;
-  position: relative;
-  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  background: #fff;
 }
 
-.masonry-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.5s ease;
-}
-
-.masonry-item img:hover { transform: scale(1.03); }
-
-/* ========================================= */
-/* 樣式 B: Flexbox 置中排版 (專為眾生設計)  */
-/* ========================================= */
-.square-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* 置中 */
-  gap: 25px;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.square-item {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  background: #fff;
-  aspect-ratio: 1 / 1;
-  width: calc((100% - 50px) / 3); 
-}
-
-.square-item img {
+/* 強制滿版背景圖 (不切邊，強制拉伸) */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.5s ease;
+  object-fit: fill; 
+  z-index: -1;      
 }
 
-.square-item img:hover { transform: scale(1.05); }
-
-
-/* --- 聯絡 --- */
-.contact-card {
-  background: #fff;
-  padding: 50px 80px;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0,33,66,0.1);
-  display: inline-block;
-  text-align: center;
-  min-width: 300px;
-}
-.contact-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin: 25px 0;
-  font-size: 1.2em;
+/* 首頁標題 Logo (放大版) */
+.hero-logo {
+  width: 75%;           /* 從 50% 改為 75%，變得更寬 */
+  max-width: 1000px;    /* 最大寬度放寬到 1000px */
+  height: auto;
+  margin-bottom: 50px;  /* 增加與按鈕的距離 */
+  z-index: 2;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)); /* 加強一點光暈 */
 }
 
-/* --- Footer --- */
-footer {
-  text-align: center;
-  padding: 40px;
-  background: #dfeeff;
-  color: #666;
-  font-size: 0.9em;
+/* 按鈕容器 */
+.home-menu { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 25px; 
+  z-index: 2; 
+  margin-top: 0px; 
 }
 
-/* --- 燈箱 (Lightbox) --- */
-#lightbox {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 20, 40, 0.9);
-  z-index: 2000;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-#lightbox-wrapper {
-  position: relative;
-  max-width: 900px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#lightbox-img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 5px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-#lightbox-desc {
-  color: #fff;
-  margin-top: 15px;
-  font-size: 1.1em;
-  text-align: center;
-}
-.lb-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  border: none;
-  font-size: 2em;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-.lb-btn:hover { background: rgba(255,255,255,0.4); }
-#prevBtn { left: -60px; }
-#nextBtn { right: -60px; }
-#closeBtn {
-  position: absolute;
-  top: -45px; right: 0;
-  color: #fff; font-size: 2.5em;
-  cursor: pointer; background: none; border: none;
+@media (min-width: 768px) { 
+  .home-menu { flex-direction: row; gap: 50px; } 
 }
 
-/* --- RWD 手機版調整 --- */
-@media (max-width: 900px) {
-  .masonry-grid { column-count: 2; }
-}
+/* 手機版 Logo 特別設定 */
 @media (max-width: 768px) {
-  nav { padding: 0 20px; }
-  .menu-toggle { display: block; }
-  
-  /* 手機選單出現時，變成滿版 */
-  nav ul {
-    display: none;
-    position: absolute;
-    top: 70px; left: 0; width: 100%;
-    background: #fff;
-    flex-direction: column;
-    padding: 20px 0;
-    gap: 0;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  .hero-logo {
+    width: 90%; /* 手機版佔滿 90% 寬度 */
+    margin-bottom: 40px;
   }
+}
+
+.home-btn {
+  display: inline-block; padding: 15px 50px; font-size: 1.4em; font-weight: 500; color: var(--primary-color); text-decoration: none;
+  background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50px;
+  transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.1); letter-spacing: 2px; text-align: center; min-width: 200px; cursor: pointer;
+}
+.home-btn:hover { background: rgba(255, 255, 255, 0.9); color: var(--accent-color); transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px rgba(0, 51, 102, 0.25); }
+
+/* --- 作品集排版 --- */
+.masonry-grid { column-count: 3; column-gap: 30px; width: 100%; }
+.masonry-item { break-inside: avoid; margin-bottom: 30px; border-radius: 16px; overflow: hidden; background: transparent; box-shadow: 0 5px 15px rgba(0, 51, 102, 0.1); transition: transform 0.3s ease; }
+.masonry-item:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 51, 102, 0.2); }
+.masonry-item img { width: 100%; display: block; cursor: pointer; border-radius: 16px; }
+
+.square-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+.square-item { position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 5px 15px rgba(0, 51, 102, 0.1); background: transparent; aspect-ratio: 1 / 1; width: calc((100% - 60px) / 3); transition: transform 0.3s ease; }
+.square-item:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 51, 102, 0.2); }
+.square-item img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; border-radius: 16px; }
+
+/* IP 角色 */
+.gallery-wrapper { position: relative; width: 100%; display: flex; align-items: center; }
+.card-deck-container { display: flex; align-items: center; height: 700px; width: 100%; overflow-x: auto; padding: 50px 20px; scrollbar-width: none; scroll-behavior: smooth; cursor: grab; }
+.card-deck-container::-webkit-scrollbar { display: none; }
+.card-item { flex: 0 0 auto; height: 550px; width: auto; margin-right: -80px; position: relative; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; z-index: 1; }
+.card-item img { height: 100%; width: auto; display: block; border: none; transition: filter 0.3s ease; -webkit-user-drag: none; }
+.card-item:hover { transform: translateY(-40px) scale(1.1) rotate(2deg); z-index: 100; margin-right: 30px; }
+.card-item:hover img { filter: drop-shadow(0 20px 40px rgba(0, 51, 102, 0.3)); }
+.scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.8); color: var(--primary-color); border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 2em; cursor: pointer; z-index: 200; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+.scroll-btn:hover { background: var(--accent-color); color: white; transform: translateY(-50%) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+#scrollLeft { left: 10px; } #scrollRight { right: 10px; }
+
+/* --- 聯絡資訊 --- */
+#contact-section { display: flex; flex-direction: column; align-items: center; }
+.about-block { display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 80px; text-align: left; max-width: 1100px; margin-bottom: 150px; }
+.about-img { width: 350px; height: 350px; object-fit: cover; border-radius: 50%; box-shadow: 0 20px 50px rgba(0, 51, 102, 0.15); border: 8px solid #fff; flex-shrink: 0; }
+.about-text h3 { font-size: 2.5em; margin-bottom: 20px; color: var(--primary-color); }
+.about-text p { font-size: 1.2em; line-height: 1.8; color: #555; }
+.contact-box { background: #fff; padding: 50px 80px; border-radius: 20px; display: block; width: 100%; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0, 51, 102, 0.05); border: 1px solid rgba(0, 51, 102, 0.1); margin-bottom: 50px; }
+.contact-row { font-size: 1.3em; margin: 20px 0; display: flex; align-items: center; gap: 20px; justify-content: center; color: var(--primary-color); }
+footer { text-align: center; padding: 40px 20px; background: var(--nav-bg); color: var(--primary-color); margin-top: 80px; }
+
+/* --- Lightbox (燈箱) --- */
+#lightbox { 
+  background: rgba(0, 10, 20, 0.98); 
+  display: none; position: fixed; top: 0; left: 0; 
+  width: 100%; height: 100%; 
+  z-index: 2000; 
+  justify-content: center; align-items: center; 
+  padding: 0; overflow: hidden; 
+}
+#lightbox-wrapper { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+
+#lightbox-content-row {
+  display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 90%; max-height: 85%;
+}
+
+#lightbox-img-container { position: relative; display: flex; justify-content: center; align-items: center; cursor: grab; }
+#lightbox-img-container:active { cursor: grabbing; }
+#lightbox-img { max-height: 85vh; max-width: 60vw; width: auto; height: auto; filter: drop-shadow(0 5px 20px rgba(0,0,0,0.5)); transition: transform 0.1s ease-out; transform-origin: center center; user-select: none; border-radius: 4px; }
+
+#lightbox-text-container { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; max-height: 80vh; }
+#lightbox-desc {
+  color: #fff; font-size: 1.1em; font-weight: 300 !important;
+  letter-spacing: 1.5px; line-height: 1.8; white-space: pre-wrap; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); text-align: left;
+  min-width: 250px; max-width: 350px; margin-top: auto;
+}
+
+.lb-btn {
+  position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); color: #fff; border: none; font-size: 4em; width: 80px; height: 80px; border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; z-index: 2010; 
+}
+.lb-btn:hover { background: rgba(255,255,255,0.3); }
+#lbPrev { left: 20px; } #lbNext { right: 20px; }
+#closeBtn { position: fixed; top: 30px; right: 40px; color: #fff; font-size: 4em; cursor: pointer; background: none; border: none; z-index: 2010; line-height: 1; opacity: 0.7; transition: 0.3s; }
+#closeBtn:hover { opacity: 1; }
+
+@media (max-width: 900px) { .masonry-grid { column-count: 2; } .about-block { flex-direction: column; text-align: center; } }
+@media (max-width: 768px) {
+  nav { padding: 0 20px; } .menu-toggle { display: block; }
+  nav ul { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: #fff; flex-direction: column; padding: 20px 0; gap: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
   nav ul.active { display: flex; }
-  nav li { width: 100%; text-align: center; }
-  nav a { display: block; padding: 15px; }
-  nav li ul { position: static; box-shadow: none; display: none; }
-  nav li.open ul { display: flex; background: #f9f9f9; }
+  .masonry-grid { column-count: 1; } .square-grid { gap: 15px; } .square-item { width: calc((100% - 15px) / 2); }
+  .card-deck-container { padding: 20px 10px; height: 400px; } .card-item { height: 250px; margin-right: -40px; }
+  .card-item:hover { transform: translateY(-10px) scale(1.05); margin-right: 0; }
+  .scroll-btn { display: none; }
+  .contact-box { padding: 40px 20px; width: 100%; } .about-img { width: 250px; height: 250px; }
   
-  section { padding: 60px 20px; min-height: auto; }
-  #home { min-height: 100vh; }
-  
-  .masonry-grid { column-count: 1; }
-  
-  .square-grid { gap: 15px; }
-  .square-item { 
-    width: calc((100% - 15px) / 2); 
-  }
-  
-  #prevBtn { left: 10px; }
-  #nextBtn { right: 10px; }
-  #closeBtn { top: -45px; right: 10px; }
-  
-  .contact-card { padding: 30px 20px; width: 100%; }
-  .contact-item { font-size: 1em; }
+  /* 手機版 Lightbox */
+  #lightbox-content-row { flex-direction: column; gap: 20px; }
+  #lightbox-img { max-width: 90vw; max-height: 60vh; }
+  #lightbox-desc { margin-top: 10px; text-align: center; max-width: 90%; }
+  #lightbox-text-container { height: auto; justify-content: flex-start; }
+  .lb-btn { width: 50px; height: 50px; font-size: 2em; background: rgba(0,0,0,0.3); }
+  #lbPrev { left: 10px; } #lbNext { right: 10px; }
+  #closeBtn { top: 20px; right: 20px; font-size: 3em; }
 }
 </style>
 </head>
 <body>
 
 <nav>
+  <a href="#home" class="logo">QUEENA.L</a>
   <div class="menu-toggle" id="mobile-menu">☰</div>
   <ul id="nav-list">
     <li><a href="#home">首頁</a></li>
-    <li><a href="#about">關於我</a></li>
-    <li id="works-dropdown-trigger">
-      <a href="javascript:void(0)">作品集 ▾</a>
-      <ul>
-        <li><a href="#works1">異想</a></li>
-        <li><a href="#works2">眾生</a></li>
-        <li><a href="#works3">插畫人物</a></li>
-        <li><a href="#works4">抽象萌物</a></li>
-      </ul>
-    </li>
-    <li><a href="#contact">聯絡</a></li>
+    <li><a href="#illustration-section">插畫作品</a></li>
+    <li><a href="#ip-section">IP 角色</a></li>
+    <li><a href="#contact-section">聯絡資訊</a></li>
   </ul>
 </nav>
 
-<section id="home"></section>
+<section id="home">
+  <img src="images/1.png" class="hero-bg-image">
+  
+  <img src="images/2.png" class="hero-logo">
+  
+  <div class="home-menu">
+    <a href="#illustration-section" class="home-btn">插畫作品</a>
+    <a href="#ip-section" class="home-btn">IP 角色</a>
+    <a href="#contact-section" class="home-btn">聯絡資訊</a>
+  </div>
+</section>
 
-<section id="about">
+<div id="illustration-section">
+  <section>
+    <h2>《異想》系列作</h2>
+    <p class="page-description">女孩頭戴玻璃罩，象徵思緒與想像的無限延伸。</p>
+    <div class="masonry-grid">
+      <div class="masonry-item"><img src="images/w1.jpg" data-desc="在沈穩的咖啡色調中，她選擇安靜地與自己相處。<br><br>外界的喧囂被隔絕在外，此刻只有內心的對話與沉澱，享受這份難得的孤寂感。"></div>
+      <div class="masonry-item"><img src="images/w2.jpg" data-desc="明亮的黃色包圍著她，如同突如其來的勇氣與希望。<br>即使前方充滿未知，她依然堅定地注視著遠方。"></div>
+      <div class="masonry-item"><img src="images/w3.jpg" data-desc="柔和的粉色輕輕落在她的身上，象徵著內心深處最柔軟的部分。<br><br>這是一場關於自我療癒的溫柔夢境。"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>《眾生》系列作</h2>
+    <p class="page-description">不同個體呈現獨特生命節奏。</p>
+    <div class="square-grid">
+      <div class="square-item"><img src="images/w4.jpg" data-desc="她坐在斑駁錯落的光影裡，彷彿時間在她身上靜止。<br>每一個光點都訴說著一段不為人知的故事。"></div>
+      <div class="square-item"><img src="images/w5.jpg" data-desc="她是一朵獨一無二的藍色玫瑰，在常規的世界裡綻放著不一樣的姿態。<br><br>堅持保有自己獨特的靈魂色彩。"></div>
+      <div class="square-item"><img src="images/w6.jpg" data-desc="在喧鬧世界的邊緣，她選擇了沉默。<br>這不是妥協，而是一種更有力量的抗議。"></div>
+      <div class="square-item"><img src="images/w7.jpg" data-desc="煙霧繚繞，緩緩繞過他的指尖。<br><br>這些煙霧如同捉摸不定的思緒與過往，在指縫間流逝。"></div>
+      <div class="square-item"><img src="images/w8.jpg" data-desc="失落並非終點，而是另一段旅程的起點。<br>在低谷中，她重新審視自己，蓄積力量。"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>插畫人物</h2>
+    <p class="page-description">探索人性的光與影。</p>
+    <div class="masonry-grid">
+      <div class="masonry-item"><img src="images/w9.jpg" data-desc="撒旦:<br>他象徵著每個人內心深處最真實、最不想面對的黑暗面。<br><br>直視它，而非逃避，才能獲得真正的完整。"></div>
+      <div class="masonry-item"><img src="images/w10.jpg" data-desc="女孩:<br>她站在耀眼的光裡，清楚知道自己的價值所在。<br>她的自信源於內心強大的自我認同。"></div>
+      <div class="masonry-item"><img src="images/w11.jpg" data-desc="擁抱自己:<br><br>無論是堅強的外表還是柔軟的內心，都是值得被愛的理由。<br>學會擁抱自己的每一個面向。"></div>
+    </div>
+  </section>
+</div>
+
+<div id="ip-section">
+  <section>
+    <h2>抽象萌物</h2>
+    <p class="page-description">原創角色 IP 設計。<br>以發展 LINE 貼圖與文創周邊為目標。</p>
+    <div class="gallery-wrapper">
+        <button class="scroll-btn" id="scrollLeft">&#10094;</button>
+        <div class="card-deck-container" id="sticker-container"></div>
+        <button class="scroll-btn" id="scrollRight">&#10095;</button>
+    </div>
+    <p style="margin-top:20px; color:#aaa; font-size:0.9em;">點擊左右箭頭，或使用滾輪、拖曳查看</p>
+  </section>
+</div>
+
+<section id="contact-section">
   <h2>關於我</h2>
-  <div class="about-container">
-    <img src="images/me.png" alt="李凱芹 Queena" class="about-img">
+  <div class="about-block">
+    <img src="images/me.png" class="about-img">
     <div class="about-text">
       <h3>李凱芹 Queena</h3>
       <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 10px;">世新大學圖文傳播學系</p>
-      <p>擅長以人物描繪畫面情感，捕捉那些微小卻深刻的瞬間。</p>
+      <p>擅長以人物描繪畫面情感，捕捉那些微小卻深刻的瞬間。<br><br>我相信每一幅畫都是與觀者靈魂的對話。<br>在藍色的基調中，探索光影、情緒與人性的流動。</p>
     </div>
   </div>
-</section>
-
-<section id="works1">
-  <h2>《異想》系列作</h2>
-  <p class="page-description">女孩頭戴玻璃罩，象徵思緒與想像的無限延伸。</p>
-  <div class="masonry-grid">
-    <div class="masonry-item"><img src="images/w1.jpg" data-desc="在沈穩的咖啡色中，她安靜地與自己相處。"></div>
-    <div class="masonry-item"><img src="images/w2.jpg" data-desc="黃色包圍著她，如同突如其來的勇氣。"></div>
-    <div class="masonry-item"><img src="images/w3.jpg" data-desc="粉色輕輕落在她的身上。"></div>
-  </div>
-</section>
-
-<section id="works2">
-  <h2>《眾生》系列作</h2>
-  <p class="page-description">不同個體呈現獨特生命節奏。</p>
-  <div class="square-grid">
-    <div class="square-item"><img src="images/w4.jpg" data-desc="她坐在斑駁的光影裡。"></div>
-    <div class="square-item"><img src="images/w5.jpg" data-desc="她是一朵藍色的玫瑰。"></div>
-    <div class="square-item"><img src="images/w6.jpg" data-desc="在喧鬧世界的邊緣，她選擇沉默。"></div>
-    <div class="square-item"><img src="images/w7.jpg" data-desc="煙霧繞過他的指尖。"></div>
-    <div class="square-item"><img src="images/w8.jpg" data-desc="失落並非終點。"></div>
-  </div>
-</section>
-
-<section id="works3">
-  <h2>插畫人物</h2>
-  <p class="page-description">探索人性的光與影。</p>
-  <div class="masonry-grid">
-    <div class="masonry-item"><img src="images/w9.jpg" data-desc="撒旦: 他象徵內心深處最真實的黑暗。"></div>
-    <div class="masonry-item"><img src="images/w10.jpg" data-desc="女孩: 她站在光裡，清楚自己的價值。"></div>
-    <div class="masonry-item"><img src="images/w11.jpg" data-desc="擁抱自己: 堅強與柔軟，都是值得被愛的理由。"></div>
-  </div>
-</section>
-
-<section id="works4">
-  <h2>抽象萌物</h2>
-  <p class="page-description">簡單線條下的可愛狂想。</p>
-  <div class="masonry-grid">
-    <div class="masonry-item"><img src="images/w12.png" data-desc="抽象萌物 01"></div>
-    <div class="masonry-item"><img src="images/w13.png" data-desc="抽象萌物 02"></div>
-    <div class="masonry-item"><img src="images/w14.png" data-desc="抽象萌物 03"></div>
-  </div>
-</section>
-
-<section id="contact">
   <h2>聯絡我</h2>
-  <div class="contact-card">
-    <div class="contact-item">
-      <span>✉ banana2003914@email.com</span>
-    </div>
-    <div class="contact-item">
-      <span> qin_vipxxi</span>
-    </div>
-    <div class="contact-item">
-      <span>📞 0905-027-201</span>
-    </div>
+  <div class="contact-box">
+    <div class="contact-row">✉ banana2003914@email.com</div>
+    <div class="contact-row"> qin_vipxxi</div>
+    <div class="contact-row">📞 0905-027-201</div>
   </div>
 </section>
 
-<footer>
-  <p>&copy; 2025 Queena</p>
-</footer>
+<footer><p>&copy; 2025 Queena Li. All Rights Reserved.</p></footer>
 
 <div id="lightbox">
+  <button id="closeBtn">&times;</button>
+  <button id="lbPrev" class="lb-btn">&#10094;</button>
+  <button id="lbNext" class="lb-btn">&#10095;</button>
   <div id="lightbox-wrapper">
-    <button id="closeBtn">&times;</button>
-    <button id="prevBtn" class="lb-btn">&#10094;</button>
-    <img id="lightbox-img" src="">
-    <button id="nextBtn" class="lb-btn">&#10095;</button>
-    <div id="lightbox-desc"></div>
+    <div id="lightbox-content-row">
+      <div id="lightbox-img-container"><img id="lightbox-img" src=""></div>
+      <div id="lightbox-text-container"><div id="lightbox-desc"></div></div>
+    </div>
   </div>
 </div>
 
 <script>
-// 選單控制
+const stickerContainer = document.getElementById('sticker-container');
+const startNum = 12, endNum = 42;
+let galleryImages = [];
+
+document.querySelectorAll('.masonry-item img, .square-item img').forEach(img => {
+  galleryImages.push({ src: img.src, desc: img.getAttribute('data-desc') || '' });
+});
+
+for (let i = startNum; i <= endNum; i++) {
+  const div = document.createElement('div');
+  div.className = 'card-item'; 
+  const img = document.createElement('img');
+  img.src = `images/${i}.png`; 
+  div.appendChild(img);
+  stickerContainer.appendChild(div);
+  galleryImages.push({ src: img.src, desc: '' });
+}
+
+let isDown = false, startX, scrollLeft, isDragging = false;
+stickerContainer.addEventListener('mousedown', (e) => { isDown=true; isDragging=false; stickerContainer.classList.add('active'); startX=e.pageX - stickerContainer.offsetLeft; scrollLeft=stickerContainer.scrollLeft; });
+stickerContainer.addEventListener('mouseleave', () => { isDown=false; stickerContainer.classList.remove('active'); });
+stickerContainer.addEventListener('mouseup', () => { isDown=false; stickerContainer.classList.remove('active'); setTimeout(()=>isDragging=false, 10); });
+stickerContainer.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x=e.pageX - stickerContainer.offsetLeft; const walk=(x-startX)*2; stickerContainer.scrollLeft=scrollLeft-walk; isDragging=true; });
+stickerContainer.addEventListener('wheel', (e) => { e.preventDefault(); stickerContainer.scrollLeft += e.deltaY * 3; }, {passive:false});
+
+document.getElementById('scrollLeft').onclick = () => stickerContainer.scrollBy({left:-400, behavior:'smooth'});
+document.getElementById('scrollRight').onclick = () => stickerContainer.scrollBy({left:400, behavior:'smooth'});
+
 const mobileMenu = document.getElementById('mobile-menu');
 const navList = document.getElementById('nav-list');
-const worksTrigger = document.getElementById('works-dropdown-trigger');
+mobileMenu.addEventListener('click', () => navList.classList.toggle('active'));
+document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => navList.classList.remove('active')));
 
-mobileMenu.addEventListener('click', () => {
-  navList.classList.toggle('active');
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > window.innerHeight * 0.8) nav.classList.add('show-nav');
+  else nav.classList.remove('show-nav');
 });
 
-worksTrigger.addEventListener('click', () => {
-  if (window.innerWidth <= 768) {
-    worksTrigger.classList.toggle('open');
-  }
-});
-
-document.querySelectorAll('nav a').forEach(link => {
-  link.addEventListener('click', () => {
-    navList.classList.remove('active');
-  });
-});
-
-// 燈箱控制
-const images = document.querySelectorAll('.masonry-item img, .square-item img');
 const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxDesc = document.getElementById('lightbox-desc');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const closeBtn = document.getElementById('closeBtn');
-let currentIndex = 0;
+const lbImg = document.getElementById('lightbox-img');
+const lbDesc = document.getElementById('lightbox-desc');
+const lbContainer = document.getElementById('lightbox-img-container');
+const prevBtn = document.getElementById('lbPrev');
+const nextBtn = document.getElementById('lbNext');
+const textContainer = document.getElementById('lightbox-text-container');
 
-function openLightbox(index) {
-  currentIndex = index;
-  const img = images[currentIndex];
-  lightboxImg.src = img.src;
-  lightboxDesc.textContent = img.dataset.desc || '';
+let currentIndex = 0, currentScale = 1, isLbDragging = false, lbStartX, lbStartY, translateX = 0, translateY = 0;
+
+function updateLightbox() {
+  const item = galleryImages[currentIndex];
+  lbImg.src = item.src;
+  lbDesc.innerHTML = item.desc;
+  
+  if (item.desc === '') textContainer.style.display = 'none';
+  else textContainer.style.display = 'flex';
+
+  currentScale = 1; translateX = 0; translateY = 0;
+  lbImg.style.transform = `translate(0,0) scale(1)`;
+}
+
+function openLightbox(src) {
+  currentIndex = galleryImages.findIndex(item => src.includes(item.src.split('/').pop()));
+  if(currentIndex === -1) currentIndex = 0;
+  updateLightbox();
   lightbox.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
-function closeLightbox() {
-  lightbox.style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-
-images.forEach((img, idx) => {
-  img.addEventListener('click', () => openLightbox(idx));
+document.addEventListener('click', (e) => {
+  if(e.target.tagName === 'IMG') {
+    if(e.target.closest('.masonry-item') || e.target.closest('.square-item') || (e.target.closest('.card-item') && !isDragging)) {
+      openLightbox(e.target.src);
+    }
+  }
 });
 
-prevBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  openLightbox(currentIndex);
-});
+document.getElementById('closeBtn').addEventListener('click', () => { lightbox.style.display = 'none'; document.body.style.overflow = 'auto'; });
+lightbox.addEventListener('click', (e) => { if(e.target === lightbox || e.target === document.getElementById('lightbox-wrapper')) { lightbox.style.display = 'none'; document.body.style.overflow = 'auto'; } });
 
-nextBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex + 1) % images.length;
-  openLightbox(currentIndex);
-});
+prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; updateLightbox(); });
+nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % galleryImages.length; updateLightbox(); });
 
-closeBtn.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => {
-  if(e.target === lightbox) closeLightbox();
-});
+lbContainer.addEventListener('wheel', (e) => { e.preventDefault(); const scaleStep = 0.1; if (e.deltaY < 0) currentScale = Math.min(currentScale + scaleStep, 5); else currentScale = Math.max(currentScale - scaleStep, 1); lbImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`; });
+
+lbContainer.addEventListener('mousedown', (e) => { if (currentScale > 1) { isLbDragging = true; lbStartX = e.clientX - translateX; lbStartY = e.clientY - translateY; lbContainer.style.cursor = 'grabbing'; } });
+window.addEventListener('mouseup', () => { isLbDragging = false; lbContainer.style.cursor = 'grab'; });
+window.addEventListener('mousemove', (e) => { if (!isLbDragging) return; e.preventDefault(); translateX = e.clientX - lbStartX; translateY = e.clientY - lbStartY; lbImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`; });
 </script>
 
 </body>
